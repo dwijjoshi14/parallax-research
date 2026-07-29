@@ -1,8 +1,13 @@
 import type { Category } from "@/lib/types";
 
+const CATEGORY_COLORS: Record<Category, string> = {
+  Markets: "var(--color-navy)",
+  Technology: "var(--color-teal)",
+  "Company Research": "var(--color-blue)",
+};
+
 export default function CategoryTag({ category }: { category: Category }) {
-  const color =
-    category === "Markets" ? "var(--color-navy)" : "var(--color-teal)";
+  const color = CATEGORY_COLORS[category];
 
   return (
     <span
