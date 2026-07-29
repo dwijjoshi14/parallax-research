@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { ArticleMeta, Category } from "@/lib/types";
 import ArticleCard from "./ArticleCard";
 
-const OPTIONS: Array<Category | "All"> = ["All", "Markets", "Technology"];
+const OPTIONS: Array<Category | "All"> = ["All", "Markets", "Technology", "Company Research"];
 
 export default function CategoryFilter({ articles }: { articles: ArticleMeta[] }) {
   const [active, setActive] = useState<Category | "All">("All");
