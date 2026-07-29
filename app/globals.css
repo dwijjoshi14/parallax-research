@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand system, from Parallax Research Group identity boards */
+  --color-paper: #f7f8f6;
+  --color-ink: #151a1f;
+  --color-navy: #173b57;
+  --color-blue: #2d6f8e;
+  --color-teal: #3c9d9b;
+  --color-muted: #667580;
+  --color-line: #e2e5e2;
+  --color-tag-markets: #173b57;
+  --color-tag-technology: #3c9d9b;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-navy: var(--color-navy);
+  --color-blue: var(--color-blue);
+  --color-teal: var(--color-teal);
+  --color-muted: var(--color-muted);
+  --color-line: var(--color-line);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-navy);
+  color: var(--color-paper);
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+/* Article body typography, applied via .prose-parallax on rendered MDX */
+.prose-parallax {
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose-parallax > * + * {
+  margin-top: 1.5em;
+}
+.prose-parallax h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 2.25em;
+}
+.prose-parallax h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.75em;
+}
+.prose-parallax p {
+  color: var(--color-ink);
+}
+.prose-parallax ul, .prose-parallax ol {
+  padding-left: 1.4em;
+}
+.prose-parallax li + li {
+  margin-top: 0.5em;
+}
+.prose-parallax ul {
+  list-style: none;
+}
+.prose-parallax ul li {
+  position: relative;
+}
+.prose-parallax ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.1em;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  background: var(--color-navy);
+}
+.prose-parallax blockquote {
+  border-left: 2px solid var(--color-navy);
+  padding-left: 1.25em;
+  font-style: italic;
+  color: var(--color-muted);
+}
+.prose-parallax img {
+  width: 100%;
+  border: 1px solid var(--color-line);
+}
+.prose-parallax strong {
+  font-weight: 600;
+}
+.prose-parallax a {
+  color: var(--color-navy);
+  text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" fill="#e2e5e2"/>
+  <g stroke="#667580" stroke-width="1.5" opacity="0.6">
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <polyline points="60,520 260,470 460,500 660,380 860,410 1060,300" fill="none" stroke="#173b57" stroke-width="3"/>
+    <polyline points="60,560 260,540 460,555 660,500 860,520 1060,470" fill="none" stroke="#3c9d9b" stroke-width="3"/>
+  </g>
+  <text x="600" y="120" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#667580" text-anchor="middle" letter-spacing="2">
+    IMAGE PLACEHOLDER
+  </text>
+  <text x="600" y="155" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#667580" text-anchor="middle">
+    Replace with a real chart or figure for this article
+  </text>
+</svg>

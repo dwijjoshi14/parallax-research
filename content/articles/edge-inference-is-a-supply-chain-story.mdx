@@ -1,0 +1,25 @@
+---
+title: "Edge Inference Is a Supply Chain Story Before It's a Software One"
+author: "Nirmay Shah"
+date: "2026-06-18"
+category: "Technology"
+summary: "Running models on-device is framed as a software win. The real constraint is further upstream."
+---
+
+The pitch for on-device inference is usually about privacy and latency: keep the data local, skip the round trip to a data center. Both are true, but they undersell the harder constraint, which sits in the supply chain rather than the software stack.
+
+## The bottleneck isn't the model
+
+Quantized, distilled models small enough to run on a phone or a laptop's NPU have existed for a while now. What has lagged is the availability of on-device silicon with enough dedicated matrix-multiply throughput and memory bandwidth to run them at a latency users will tolerate.
+
+That silicon has a multi-year lead time. Committing to a specific NPU architecture today constrains what model formats will run efficiently on devices shipping two or three years from now, which means:
+
+- Chip vendors are making bets on model architectures before those architectures are settled
+- Model teams are, in some cases, shaping architecture choices around what upcoming silicon will support well
+- The two roadmaps are more entangled than either side's public communication suggests
+
+## Why this matters for the "AI PC" narrative
+
+The consumer framing of on-device AI, faster autocomplete, offline assistants, local image generation, is downstream of a component allocation decision made years earlier. When a device maker announces a new on-device capability, the more interesting question is which fab and packaging commitments made that timeline possible, not which model shipped.
+
+We think the more durable investable signal in this space is NPU capacity and packaging capacity commitments, not model announcements, which tend to be timed for marketing cycles rather than genuine capability inflection points.

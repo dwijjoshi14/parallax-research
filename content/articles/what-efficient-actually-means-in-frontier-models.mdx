@@ -1,0 +1,38 @@
+---
+title: "What 'Efficient' Actually Means in the Age of Trillion-Parameter Models"
+author: "Nirmay Shah"
+date: "2026-07-14"
+category: "Technology"
+summary: "Efficiency claims from AI labs rarely specify what's held constant. Here's how to read them."
+image: "/images/articles/efficient-models-placeholder.svg"
+---
+
+Every few months, a lab announces a model that is "10x more efficient" than the one before it. The claim is almost never false, and almost never as informative as it sounds, because efficiency is a ratio, and ratios depend entirely on what you hold fixed.
+
+## Three different things called "efficiency"
+
+In practice, the word is doing at least three separate jobs in most papers and press releases:
+
+- **Training efficiency**: less compute or energy spent to reach a given loss.
+- **Inference efficiency**: lower cost or latency to serve a fixed level of quality.
+- **Parameter efficiency**: smaller model size for the same capability on a benchmark suite.
+
+A model can improve sharply on one of these while staying flat, or even regressing, on the other two. Compressing a model for cheaper inference, for instance, routinely costs some training-time efficiency, since the smaller model needs more careful data curation to match the larger one's quality.
+
+## Why the comparison points matter more than the number
+
+> The honest version of an efficiency claim is not "10x better" but "10x better than what, measured how, held constant against what."
+
+When a lab reports a FLOPs-per-token improvement, the useful question is which baseline generation it's compared against, and whether that baseline was itself compute-optimal for its era. Comparing a 2026 model against a hastily-trained 2023 baseline will always produce a large, mostly meaningless number.
+
+### A short checklist for reading these claims
+
+1. Is the comparison against a compute-optimal baseline, or a convenient one?
+2. Does the efficiency gain hold at the model's actual deployed scale, or only in a scaled-down ablation?
+3. Is quality held constant, or did quality also drop alongside cost?
+
+## What this means for capital allocation
+
+For investors and operators tracking AI infrastructure spend, the practical implication is that headline efficiency numbers are a weak proxy for unit economics. The more reliable signal is cost-per-quality-adjusted-token over successive quarters from the same vendor, which is harder to find but far more honest.
+
+We'll be tracking this metric, where public data allows, across the major model providers in a follow-up piece.
