@@ -54,7 +54,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-t border-[var(--color-line)]">
-        <div className="mx-auto max-w-3xl px-6 py-14 grid sm:grid-cols-2 gap-10">
+        <div className="mx-auto max-w-3xl px-6 py-14 grid sm:grid-cols-3 gap-10">
           <div>
             <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-navy)]">
               Markets
@@ -73,6 +73,16 @@ export default function AboutPage() {
               Coverage of AI infrastructure, hardware supply chains, and
               systems-level constraints that shape what gets built, well
               upstream of the product announcements.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-blue)]">
+              Company Research
+            </h2>
+            <p className="mt-3 text-[15px] text-[var(--color-muted)] leading-relaxed">
+              Deep dives on individual companies, business model, competitive
+              position, and unit economics, as a complement to our broader
+              Markets and Technology coverage.
             </p>
           </div>
         </div>
