@@ -1,4 +1,4 @@
-export type Category = "Markets" | "Technology";
+export type Category = "Markets" | "Technology" | "Company Research";
 
 export interface ArticleFrontmatter {
   title: string;
