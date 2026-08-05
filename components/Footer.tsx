@@ -9,8 +9,8 @@ export default function Footer() {
         <div>
           <Logo variant="footer" />
           <p className="mt-4 text-sm text-white/70 max-w-xs leading-relaxed">
-            Independent research on markets and technology, examined from
-            more than one angle.
+            Independent research across markets, economics, and technology,
+            each subject examined from more than one angle.
           </p>
         </div>
 
@@ -20,7 +20,7 @@ export default function Footer() {
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
-              <a
+              
                 href="https://www.linkedin.com"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -30,7 +30,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
+              
                 href="https://medium.com"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -40,11 +40,11 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href="mailto:hello@parallaxresearch.group"
+              
+                href="mailto:parallaxresearchgroup@gmail.com"
                 className="text-white/80 hover:text-white transition-colors"
               >
-                hello@parallaxresearch.group
+                parallaxresearchgroup@gmail.com
               </a>
             </li>
           </ul>
