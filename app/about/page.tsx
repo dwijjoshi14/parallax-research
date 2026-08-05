@@ -6,6 +6,19 @@ export const metadata: Metadata = {
     "About Parallax Research Group: our name, our research areas, and our founders.",
 };
 
+// Rotates through the site's palette so the three avatars aren't identical.
+const AVATAR_COLORS = ["var(--color-navy)", "var(--color-teal)", "var(--color-blue)"];
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
 const FOUNDERS = [
   {
     name: "Founder Name One",
@@ -94,15 +107,17 @@ export default function AboutPage() {
             Co-founders
           </h2>
           <div className="mt-8 grid sm:grid-cols-3 gap-8">
-            {FOUNDERS.map((founder) => (
+            {FOUNDERS.map((founder, i) => (
               <div key={founder.name}>
-                {/* Placeholder photo slot. Replace the div below with a
-                    next/image pointing at the founder's real headshot. */}
+                {/* Monogram avatar placeholder. Swap for a next/image
+                    pointing at the founder's real headshot once photos
+                    are ready, keep the same w-20 h-20 sizing. */}
                 <div
-                  className="w-20 h-20 border border-dashed border-[var(--color-line)] flex items-center justify-center text-[10px] text-[var(--color-muted)] uppercase tracking-wide"
+                  className="w-20 h-20 rounded-full flex items-center justify-center text-white text-lg font-semibold"
+                  style={{ backgroundColor: AVATAR_COLORS[i % AVATAR_COLORS.length] }}
                   aria-hidden="true"
                 >
-                  Photo
+                  {getInitials(founder.name)}
                 </div>
                 <h3 className="mt-4 font-semibold">{founder.name}</h3>
                 <p className="text-xs text-[var(--color-muted)] mt-0.5">
