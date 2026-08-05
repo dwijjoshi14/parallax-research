@@ -14,11 +14,11 @@ export default function HomePage() {
             Parallax Research Group
           </p>
           <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
-            Independent research on markets and technology.
+            Independent research across markets, economics, and technology.
           </h1>
           <p className="mt-5 text-lg text-[var(--color-muted)] leading-relaxed max-w-xl">
-            We look at the same questions from more than one vantage point,
-            because the view from a single angle is rarely the whole picture.
+            Parallax is our method: we examine each subject from more than one
+            angle, rather than settling for whichever narrative is loudest.
           </p>
           <div className="mt-8 flex items-center gap-5">
             <Link
