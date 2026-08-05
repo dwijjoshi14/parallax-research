@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     default: "Parallax Research Group",
     template: "%s | Parallax Research Group",
   },
-  description: "Independent research on markets and technology.",
+  description: "Independent research across markets, economics, and technology.",
   openGraph: {
     title: "Parallax Research Group",
-    description: "Independent research on markets and technology.",
+    description: "Independent research across markets, economics, and technology.",
     url: SITE_URL,
     siteName: "Parallax Research Group",
     type: "website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Parallax Research Group",
-    description: "Independent research on markets and technology.",
+    description: "Independent research across markets, economics, and technology.",
   },
 };
 
