@@ -5,9 +5,20 @@ export const metadata: Metadata = {
   description: "Get in touch with Parallax Research Group.",
 };
 
-// Set this to the Buttondown (or Substack) username once the account exists,
-// e.g. "parallaxresearch". Leave blank to show the disabled fallback state.
-const NEWSLETTER_USERNAME = "";
+// Set this once Nirmay sends the real publication URL. Leave handle blank to
+// show the disabled fallback state. provider controls which embed renders:
+// "substack" uses their iframe embed, "buttondown" uses the form embed.
+const NEWSLETTER: { provider: "substack" | "buttondown"; handle: string } = {
+  provider: "substack",
+  handle: "", // e.g. "parallaxresearch" for a Substack at parallaxresearch.substack.com
+};
+
+// Set to true once real LinkedIn/Medium URLs come in from Nirmay, and fill
+// in the hrefs just below. Until then these render unlinked rather than
+// pointing at generic homepages.
+const SOCIAL_LINKS_READY = false;
+const LINKEDIN_URL = "";
+const MEDIUM_URL = "";
 
 export default function ContactPage() {
   return (
@@ -24,29 +35,49 @@ export default function ContactPage() {
       </p>
 
       <div className="mt-10 space-y-3">
-        
+        <a
           href="mailto:parallaxresearchgroup@gmail.com"
           className="block text-lg font-medium text-[var(--color-navy)] hover:underline"
         >
           parallaxresearchgroup@gmail.com
         </a>
         <div className="flex gap-5 text-sm">
-          
-            href="https://www.linkedin.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
-          >
-            LinkedIn
-          </a>
-          
-            href="https://medium.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
-          >
-            Medium
-          </a>
+          {SOCIAL_LINKS_READY ? (
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
+            >
+              LinkedIn
+            </a>
+          ) : (
+            <span
+              className="text-[var(--color-ink)]/40 cursor-default"
+              aria-disabled="true"
+              title="Coming soon"
+            >
+              LinkedIn
+            </span>
+          )}
+          {SOCIAL_LINKS_READY ? (
+            <a
+              href={MEDIUM_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
+            >
+              Medium
+            </a>
+          ) : (
+            <span
+              className="text-[var(--color-ink)]/40 cursor-default"
+              aria-disabled="true"
+              title="Coming soon"
+            >
+              Medium
+            </span>
+          )}
         </div>
       </div>
 
@@ -58,9 +89,18 @@ export default function ContactPage() {
           Get new research in your inbox as it's published.
         </p>
 
-        {NEWSLETTER_USERNAME ? (
+        {NEWSLETTER.handle && NEWSLETTER.provider === "substack" ? (
+          <iframe
+            src={`https://${NEWSLETTER.handle}.substack.com/embed`}
+            width="480"
+            height="150"
+            style={{ border: "1px solid var(--color-line)", background: "white" }}
+            className="mt-5 max-w-md w-full"
+            title="Subscribe to the Parallax Research Group newsletter"
+          />
+        ) : NEWSLETTER.handle && NEWSLETTER.provider === "buttondown" ? (
           <form
-            action={`https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER_USERNAME}`}
+            action={`https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER.handle}`}
             method="post"
             className="mt-5 flex max-w-md"
           >
@@ -81,10 +121,10 @@ export default function ContactPage() {
             </button>
           </form>
         ) : (
-          // Fallback shown until NEWSLETTER_USERNAME is set above. Once
-          // Nirmay confirms the Buttondown (or Substack) account, fill in
-          // that constant and this becomes a fully working form, no other
-          // changes needed.
+          // Fallback shown until NEWSLETTER.handle is set above. Once Nirmay
+          // sends the Substack (or Buttondown) publication URL, fill in the
+          // handle and provider and this becomes a fully working embed, no
+          // other changes needed.
           <div className="mt-5 flex max-w-md">
             <input
               type="email"
