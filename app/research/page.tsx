@@ -5,7 +5,7 @@ import CategoryFilter from "@/components/CategoryFilter";
 export const metadata: Metadata = {
   title: "Research",
   description:
-    "All research from Parallax Research Group, on markets and technology.",
+    "All research from Parallax Research Group, across markets, economics, and technology.",
 };
 
 export default function ResearchPage() {
