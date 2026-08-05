@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   description: "Get in touch with Parallax Research Group.",
 };
 
+// Set this to the Buttondown (or Substack) username once the account exists,
+// e.g. "parallaxresearch". Leave blank to show the disabled fallback state.
+const NEWSLETTER_USERNAME = "";
+
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
@@ -20,14 +24,14 @@ export default function ContactPage() {
       </p>
 
       <div className="mt-10 space-y-3">
-        <a
-          href="mailto:hello@parallaxresearch.group"
+        
+          href="mailto:parallaxresearchgroup@gmail.com"
           className="block text-lg font-medium text-[var(--color-navy)] hover:underline"
         >
-          hello@parallaxresearch.group
+          parallaxresearchgroup@gmail.com
         </a>
         <div className="flex gap-5 text-sm">
-          <a
+          
             href="https://www.linkedin.com"
             target="_blank"
             rel="noreferrer noopener"
@@ -35,7 +39,7 @@ export default function ContactPage() {
           >
             LinkedIn
           </a>
-          <a
+          
             href="https://medium.com"
             target="_blank"
             rel="noreferrer noopener"
@@ -51,29 +55,53 @@ export default function ContactPage() {
           Newsletter
         </h2>
         <p className="mt-3 text-sm text-[var(--color-muted)] leading-relaxed max-w-md">
-          Get new research in your inbox. This form is a placeholder, it
-          isn't wired up to an email provider yet.
+          Get new research in your inbox as it's published.
         </p>
 
-        {/* Placeholder signup field. No <form> submission handler is wired
-            up: connect this to an email provider (Mailchimp, Buttondown,
-            ConvertKit, etc.) before going live. */}
-        <div className="mt-5 flex max-w-md">
-          <input
-            type="email"
-            placeholder="you@example.com"
-            disabled
-            aria-label="Email address"
-            className="flex-1 border border-[var(--color-line)] px-4 py-3 text-sm bg-white disabled:opacity-60 disabled:cursor-not-allowed"
-          />
-          <button
-            type="button"
-            disabled
-            className="px-5 py-3 bg-[var(--color-navy)] text-white text-sm font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+        {NEWSLETTER_USERNAME ? (
+          <form
+            action={`https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER_USERNAME}`}
+            method="post"
+            className="mt-5 flex max-w-md"
           >
-            Subscribe
-          </button>
-        </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              aria-label="Email address"
+              className="flex-1 border border-[var(--color-line)] px-4 py-3 text-sm bg-white"
+            />
+            <input type="hidden" name="embed" value="1" />
+            <button
+              type="submit"
+              className="px-5 py-3 bg-[var(--color-navy)] text-white text-sm font-medium hover:bg-[var(--color-blue)] transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+        ) : (
+          // Fallback shown until NEWSLETTER_USERNAME is set above. Once
+          // Nirmay confirms the Buttondown (or Substack) account, fill in
+          // that constant and this becomes a fully working form, no other
+          // changes needed.
+          <div className="mt-5 flex max-w-md">
+            <input
+              type="email"
+              placeholder="you@example.com"
+              disabled
+              aria-label="Email address"
+              className="flex-1 border border-[var(--color-line)] px-4 py-3 text-sm bg-white disabled:opacity-60 disabled:cursor-not-allowed"
+            />
+            <button
+              type="button"
+              disabled
+              className="px-5 py-3 bg-[var(--color-navy)] text-white text-sm font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              Subscribe
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
