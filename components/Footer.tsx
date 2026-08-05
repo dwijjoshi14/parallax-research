@@ -19,34 +19,9 @@ export default function Footer() {
             Elsewhere
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li>
-              
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              
-                href="https://medium.com"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                Medium
-              </a>
-            </li>
-            <li>
-              
-                href="mailto:parallaxresearchgroup@gmail.com"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                parallaxresearchgroup@gmail.com
-              </a>
-            </li>
+            <li><a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">LinkedIn</a></li>
+            <li><a href="https://medium.com" target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">Medium</a></li>
+            <li><a href="mailto:parallaxresearchgroup@gmail.com" className="text-white/80 hover:text-white transition-colors">parallaxresearchgroup@gmail.com</a></li>
           </ul>
         </div>
 
@@ -55,21 +30,9 @@ export default function Footer() {
             Site
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li>
-              <a href="/research" className="text-white/80 hover:text-white transition-colors">
-                Research
-              </a>
-            </li>
-            <li>
-              <a href="/about" className="text-white/80 hover:text-white transition-colors">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="/contact" className="text-white/80 hover:text-white transition-colors">
-                Contact
-              </a>
-            </li>
+            <li><a href="/research" className="text-white/80 hover:text-white transition-colors">Research</a></li>
+            <li><a href="/about" className="text-white/80 hover:text-white transition-colors">About</a></li>
+            <li><a href="/contact" className="text-white/80 hover:text-white transition-colors">Contact</a></li>
           </ul>
         </div>
       </div>
