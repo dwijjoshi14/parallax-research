@@ -21,7 +21,7 @@ function getInitials(name: string) {
 
 const FOUNDERS = [
   {
-    name: "Founder Name One",
+    name: "Nirmay Thakkar",
     role: "Co-Founder, Markets",
     bio: "Placeholder bio. Replace with a short background: relevant experience, focus areas, and what drew them to independent research.",
   },
