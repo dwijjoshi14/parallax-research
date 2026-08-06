@@ -1,10 +1,8 @@
 import Logo from "./Logo";
 
-// Set to true once Nirmay sends the real LinkedIn/Medium URLs, and fill in
-// the two constants below. Until then these render unlinked rather than
-// pointing at generic homepages.
-const SOCIAL_LINKS_READY = false;
-const LINKEDIN_URL = "";
+// Each link renders unlinked until its own URL is set below, rather than
+// pointing at a generic homepage.
+const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
 const MEDIUM_URL = "";
 
 export default function Footer() {
@@ -27,14 +25,14 @@ export default function Footer() {
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
-              {SOCIAL_LINKS_READY ? (
+              {LINKEDIN_URL ? (
                 <a href={LINKEDIN_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">LinkedIn</a>
               ) : (
                 <span className="text-white/40 cursor-default" aria-disabled="true" title="Coming soon">LinkedIn</span>
               )}
             </li>
             <li>
-              {SOCIAL_LINKS_READY ? (
+              {MEDIUM_URL ? (
                 <a href={MEDIUM_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">Medium</a>
               ) : (
                 <span className="text-white/40 cursor-default" aria-disabled="true" title="Coming soon">Medium</span>
