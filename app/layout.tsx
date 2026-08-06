@@ -16,17 +16,27 @@ export const metadata: Metadata = {
     template: "%s | Parallax Research Group",
   },
   description: "Independent research across markets, economics, and technology.",
+  icons: {
+    icon: [{ url: "/brand/15_favicon_navy_tile.png", sizes: "512x512", type: "image/png" }],
+    apple: [{ url: "/brand/15_favicon_navy_tile.png", sizes: "512x512", type: "image/png" }],
+  },
   openGraph: {
     title: "Parallax Research Group",
     description: "Independent research across markets, economics, and technology.",
     url: SITE_URL,
     siteName: "Parallax Research Group",
     type: "website",
+    // Square for now (matches the only social asset exported so far). A
+    // 1200x630 landscape version would render better on platforms that crop
+    // to that ratio (e.g. Twitter/X, some Slack unfurls); swap this out if
+    // Nirmay exports one later.
+    images: [{ url: "/brand/16_social_square.png", width: 1024, height: 1024, alt: "Parallax Research Group" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Parallax Research Group",
     description: "Independent research across markets, economics, and technology.",
+    images: ["/brand/16_social_square.png"],
   },
 };
 
