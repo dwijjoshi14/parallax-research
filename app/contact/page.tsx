@@ -13,11 +13,9 @@ const NEWSLETTER: { provider: "substack" | "buttondown"; handle: string } = {
   handle: "", // e.g. "parallaxresearch" for a Substack at parallaxresearch.substack.com
 };
 
-// Set to true once real LinkedIn/Medium URLs come in from Nirmay, and fill
-// in the hrefs just below. Until then these render unlinked rather than
-// pointing at generic homepages.
-const SOCIAL_LINKS_READY = false;
-const LINKEDIN_URL = "";
+// Each link renders unlinked until its own URL is set below, rather than
+// pointing at a generic homepage.
+const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
 const MEDIUM_URL = "";
 
 export default function ContactPage() {
@@ -42,7 +40,7 @@ export default function ContactPage() {
           parallaxresearchgroup@gmail.com
         </a>
         <div className="flex gap-5 text-sm">
-          {SOCIAL_LINKS_READY ? (
+          {LINKEDIN_URL ? (
             <a
               href={LINKEDIN_URL}
               target="_blank"
@@ -60,7 +58,7 @@ export default function ContactPage() {
               LinkedIn
             </span>
           )}
-          {SOCIAL_LINKS_READY ? (
+          {MEDIUM_URL ? (
             <a
               href={MEDIUM_URL}
               target="_blank"
