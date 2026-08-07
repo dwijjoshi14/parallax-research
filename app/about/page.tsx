@@ -23,17 +23,17 @@ const FOUNDERS = [
   {
     name: "Nirmay Thakkar",
     role: "Co-Founder, Markets",
-    bio: "Placeholder bio. Replace with a short background: relevant experience, focus areas, and what drew them to independent research.",
+    bio: "Nirmay is a co-founder of Parallax Research Group, where he writes about markets and the economy. He's drawn to figuring out what's really driving a market move versus the story everyone's telling about it. He's pursuing a double degree in Finance and Statistics at the University of Toronto and works in finance. Outside of markets, you'll usually find him on the tennis or basketball court, or cooking something new.",
   },
   {
-    name: "Founder Name Two",
+    name: "Dwij Joshi",
     role: "Co-Founder, Technology",
-    bio: "Placeholder bio. Replace with a short background: relevant experience, focus areas, and what drew them to independent research.",
+    bio: "Dwij is a co-founder of Parallax Research Group, where he writes about technology, with a focus on AI infrastructure, hardware, and the engineering constraints that shape what actually gets built. He's a Mechatronics Engineering student at Toronto Metropolitan University, with hands-on experience building embedded systems and robotics projects. He's drawn to the gap between how technology gets marketed and how it's actually engineered underneath.",
   },
   {
-    name: "Founder Name Three",
-    role: "Co-Founder, Operations",
-    bio: "Placeholder bio. Replace with a short background: relevant experience, focus areas, and what drew them to independent research.",
+    name: "Stealth",
+    role: "Co-Founder, Stealth",
+    bio: "Stealth",
   },
 ];
 
