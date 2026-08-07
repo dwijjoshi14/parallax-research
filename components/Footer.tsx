@@ -1,9 +1,7 @@
 import Logo from "./Logo";
 
-// Each link renders unlinked until its own URL is set below, rather than
-// pointing at a generic homepage.
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
-const MEDIUM_URL = "";
+const SUBSTACK_URL = "https://substack.com/@theprg";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -25,18 +23,10 @@ export default function Footer() {
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
-              {LINKEDIN_URL ? (
-                <a href={LINKEDIN_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">LinkedIn</a>
-              ) : (
-                <span className="text-white/40 cursor-default" aria-disabled="true" title="Coming soon">LinkedIn</span>
-              )}
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">LinkedIn</a>
             </li>
             <li>
-              {MEDIUM_URL ? (
-                <a href={MEDIUM_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">Medium</a>
-              ) : (
-                <span className="text-white/40 cursor-default" aria-disabled="true" title="Coming soon">Medium</span>
-              )}
+              <a href={SUBSTACK_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">Substack</a>
             </li>
             <li><a href="mailto:parallaxresearchgroup@gmail.com" className="text-white/80 hover:text-white transition-colors">parallaxresearchgroup@gmail.com</a></li>
           </ul>
