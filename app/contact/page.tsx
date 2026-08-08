@@ -5,16 +5,13 @@ export const metadata: Metadata = {
   description: "Get in touch with Parallax Research Group.",
 };
 
-// Substack is our only "elsewhere" channel besides LinkedIn — Medium was
-// dropped entirely (Nirmay, Aug 2026). provider is kept in case we ever
-// move to Buttondown, but it's locked to "substack" for now.
 const NEWSLETTER: { provider: "substack" | "buttondown"; handle: string } = {
   provider: "substack",
-  handle: "theprg", // https://theprg.substack.com — verify this resolves before shipping
+  handle: "theprg",
 };
 
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
-const SUBSTACK_URL = "https://substack.com/@theprg";
+const SUBSTACK_URL = "https://theprg.substack.com/";
 
 export default function ContactPage() {
   return (
