@@ -1,7 +1,7 @@
 import Logo from "./Logo";
 
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
-const SUBSTACK_URL = "https://substack.com/@theprg";
+const SUBSTACK_URL = "https://theprg.substack.com/";
 
 export default function Footer() {
   const year = new Date().getFullYear();
