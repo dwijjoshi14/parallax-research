@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getRecentArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
+import ScrollReveal from "@/components/ScrollReveal";
+import BrandMotif from "@/components/BrandMotif";
 
 export default function HomePage() {
   const recentArticles = getRecentArticles(3);
@@ -8,8 +10,9 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
-        <div className="max-w-2xl">
+      <section className="relative overflow-hidden mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <BrandMotif className="pointer-events-none absolute right-[-40px] top-1/2 -translate-y-1/2 hidden lg:block w-[420px] h-[420px]" />
+        <div className="relative max-w-2xl">
           <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--color-teal)]">
             Parallax Research Group
           </p>
@@ -40,17 +43,19 @@ export default function HomePage() {
       {/* Recent articles */}
       <section className="border-t border-[var(--color-line)]">
         <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-ink)]/70">
-              Recent research
-            </h2>
-            <Link
-              href="/research"
-              className="text-sm font-medium text-[var(--color-navy)] hover:underline"
-            >
-              View all
-            </Link>
-          </div>
+          <ScrollReveal>
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-ink)]/70">
+                Recent research
+              </h2>
+              <Link
+                href="/research"
+                className="text-sm font-medium text-[var(--color-navy)] hover:underline"
+              >
+                View all
+              </Link>
+            </div>
+          </ScrollReveal>
 
           {recentArticles.length === 0 ? (
             <p className="mt-10 text-sm text-[var(--color-muted)]">
@@ -59,8 +64,10 @@ export default function HomePage() {
             </p>
           ) : (
             <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-6">
-              {recentArticles.map((article) => (
-                <ArticleCard key={article.slug} article={article} />
+              {recentArticles.map((article, i) => (
+                <ScrollReveal key={article.slug} delay={i * 100}>
+                  <ArticleCard article={article} />
+                </ScrollReveal>
               ))}
             </div>
           )}
