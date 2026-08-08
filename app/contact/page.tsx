@@ -28,14 +28,14 @@ export default function ContactPage() {
       </p>
 
       <div className="mt-10 space-y-3">
-        
+        <a
           href="mailto:parallaxresearchgroup@gmail.com"
           className="block text-lg font-medium text-[var(--color-navy)] hover:underline"
         >
           parallaxresearchgroup@gmail.com
         </a>
         <div className="flex gap-5 text-sm">
-          
+          <a
             href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer noopener"
@@ -43,7 +43,7 @@ export default function ContactPage() {
           >
             LinkedIn
           </a>
-          
+          <a
             href={SUBSTACK_URL}
             target="_blank"
             rel="noreferrer noopener"
