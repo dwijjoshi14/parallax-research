@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import ScrollReveal from "@/components/ScrollReveal";
+import BrandMotif from "@/components/BrandMotif";
 
 export const metadata: Metadata = {
   title: "About",
@@ -40,34 +42,37 @@ const FOUNDERS = [
 export default function AboutPage() {
   return (
     <div>
-      <section className="mx-auto max-w-3xl px-6 pt-16 pb-14 sm:pt-20">
-        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--color-teal)]">
-          About
-        </p>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-[-0.02em]">
-          The view depends on where you stand.
-        </h1>
+      <section className="relative overflow-hidden mx-auto max-w-3xl px-6 pt-16 pb-14 sm:pt-20">
+        <BrandMotif className="pointer-events-none absolute right-[-60px] top-[-40px] hidden md:block w-[260px] h-[260px]" />
+        <div className="relative">
+          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--color-teal)]">
+            About
+          </p>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-[-0.02em]">
+            The view depends on where you stand.
+          </h1>
 
-        <div className="mt-8 space-y-5 text-[17px] leading-relaxed text-[var(--color-ink)]">
-          <p>
-            Parallax is the apparent shift in an object's position when it's
-            viewed from two different vantage points, the same principle that
-            lets astronomers measure distances to stars and lets a person
-            triangulate distance just by moving their head. Nothing about the
-            object changes. Only the angle does, and that's often enough to
-            see it more clearly.
-          </p>
-          <p>
-            That's the premise of this group. We publish independent,
-            data-driven research on markets and technology, and we try to hold
-            more than one vantage point at once rather than defaulting to
-            whichever narrative is loudest that week.
-          </p>
+          <div className="mt-8 space-y-5 text-[17px] leading-relaxed text-[var(--color-ink)]">
+            <p>
+              Parallax is the apparent shift in an object's position when it's
+              viewed from two different vantage points, the same principle that
+              lets astronomers measure distances to stars and lets a person
+              triangulate distance just by moving their head. Nothing about the
+              object changes. Only the angle does, and that's often enough to
+              see it more clearly.
+            </p>
+            <p>
+              That's the premise of this group. We publish independent,
+              data-driven research on markets and technology, and we try to hold
+              more than one vantage point at once rather than defaulting to
+              whichever narrative is loudest that week.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="border-t border-[var(--color-line)]">
-        <div className="mx-auto max-w-3xl px-6 py-14 grid sm:grid-cols-3 gap-10">
+        <ScrollReveal className="mx-auto max-w-3xl px-6 py-14 grid sm:grid-cols-3 gap-10">
           <div>
             <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-navy)]">
               Markets
@@ -98,17 +103,19 @@ export default function AboutPage() {
               Markets and Technology coverage.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="border-t border-[var(--color-line)]">
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-ink)]/70">
-            Co-founders
-          </h2>
+          <ScrollReveal>
+            <h2 className="text-sm font-semibold tracking-[0.14em] uppercase text-[var(--color-ink)]/70">
+              Co-founders
+            </h2>
+          </ScrollReveal>
           <div className="mt-8 grid sm:grid-cols-3 gap-8">
             {FOUNDERS.map((founder, i) => (
-              <div key={founder.name}>
+              <ScrollReveal key={founder.name} delay={i * 100}>
                 {/* Monogram avatar placeholder. Swap for a next/image
                     pointing at the founder's real headshot once photos
                     are ready, keep the same w-20 h-20 sizing. */}
@@ -126,7 +133,7 @@ export default function AboutPage() {
                 <p className="mt-3 text-sm text-[var(--color-muted)] leading-relaxed">
                   {founder.bio}
                 </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
