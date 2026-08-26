@@ -1,0 +1,56 @@
+import "server-only";
+import { Resend } from "resend";
+
+function getResendClient() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error("Missing RESEND_API_KEY environment variable.");
+  }
+  return new Resend(key);
+}
+
+// Update this once a sending domain is verified in Resend. Until then,
+// Resend's own onboarding@resend.dev sender works for testing but has
+// real limitations for production sends, see the note in chat.
+const FROM_ADDRESS =
+  process.env.NEWSLETTER_FROM_EMAIL ||
+  "Parallax Research Group <onboarding@resend.dev>";
+
+export async function sendConfirmationEmail(
+  toEmail: string,
+  confirmationToken: string
+) {
+  const resend = getResendClient();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (!siteUrl) {
+    throw new Error("Missing NEXT_PUBLIC_SITE_URL environment variable.");
+  }
+
+  const confirmUrl = `${siteUrl}/api/confirm?token=${confirmationToken}`;
+
+  await resend.emails.send({
+    from: FROM_ADDRESS,
+    to: toEmail,
+    subject: "Confirm your subscription to Parallax Morning Brief",
+    html: `
+      <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; color: #1a1a1a;">
+        <p style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #3C9D9B; margin: 0 0 16px;">
+          Parallax Research Group
+        </p>
+        <h1 style="font-size: 22px; margin: 0 0 16px; color: #173B57;">
+          Confirm your subscription
+        </h1>
+        <p style="font-size: 15px; line-height: 1.6; margin: 0 0 24px;">
+          Click below to confirm you would like to receive the Parallax Morning Brief.
+        </p>
+        <a href="${confirmUrl}" style="display: inline-block; background: #173B57; color: #ffffff; text-decoration: none; padding: 12px 20px; font-size: 14px; font-weight: 600;">
+          Confirm subscription
+        </a>
+        <p style="font-size: 13px; color: #6b6b6b; margin-top: 24px;">
+          If you did not request this, you can ignore this email.
+        </p>
+      </div>
+    `,
+  });
+}

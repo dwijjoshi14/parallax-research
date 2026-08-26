@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch with Parallax Research Group.",
 };
 
-const NEWSLETTER: { provider: "substack" | "buttondown"; handle: string } = {
-  provider: "substack",
-  handle: "theprg",
-};
-
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
+// Substack now serves as a read-only archive of past issues; the
+// Morning Brief pipeline delivers the real newsletter via Resend.
 const SUBSTACK_URL = "https://theprg.substack.com/";
 
 export default function ContactPage() {
@@ -49,7 +47,7 @@ export default function ContactPage() {
             rel="noreferrer noopener"
             className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
           >
-            Substack
+            Substack archive
           </a>
         </div>
       </div>
@@ -59,17 +57,10 @@ export default function ContactPage() {
           Newsletter
         </h2>
         <p className="mt-3 text-sm text-[var(--color-muted)] leading-relaxed max-w-md">
-          Get new research in your inbox as it's published.
+          Get the Parallax Morning Brief in your inbox as it's published.
         </p>
 
-        <iframe
-          src={`https://${NEWSLETTER.handle}.substack.com/embed`}
-          width="480"
-          height="150"
-          style={{ border: "1px solid var(--color-line)", background: "white" }}
-          className="mt-5 max-w-md w-full"
-          title="Subscribe to the Parallax Research Group newsletter"
-        />
+        <NewsletterForm />
       </div>
     </div>
   );
