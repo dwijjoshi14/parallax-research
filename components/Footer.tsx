@@ -1,7 +1,6 @@
 import Logo from "./Logo";
 
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
-const SUBSTACK_URL = "https://theprg.substack.com/";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -24,9 +23,6 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
               <a href={LINKEDIN_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">LinkedIn</a>
-            </li>
-            <li>
-              <a href={SUBSTACK_URL} target="_blank" rel="noreferrer noopener" className="text-white/80 hover:text-white transition-colors">Substack</a>
             </li>
             <li><a href="mailto:parallaxresearchgroup@gmail.com" className="text-white/80 hover:text-white transition-colors">parallaxresearchgroup@gmail.com</a></li>
           </ul>
