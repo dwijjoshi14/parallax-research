@@ -14,7 +14,8 @@ export async function GET(req: NextRequest) {
     if (!result.ok) {
       return NextResponse.redirect(`${siteUrl}/newsletter/confirm-error`);
     }
-    return NextResponse.redirect(`${siteUrl}/newsletter/confirmed`);
+    const already = result.alreadyActive ? "?already=true" : "";
+    return NextResponse.redirect(`${siteUrl}/newsletter/confirmed${already}`);
   } catch (err) {
     console.error("confirm error:", err instanceof Error ? err.message : err);
     return NextResponse.redirect(`${siteUrl}/newsletter/confirm-error`);

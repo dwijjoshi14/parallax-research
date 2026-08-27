@@ -50,7 +50,9 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
   }
 
   // Brand new, or previously unsubscribed/bounced/complained: issue a
-  // fresh token pair and require a new confirmation.
+  // fresh token pair and require a new confirmation. This is what makes
+  // re-subscription after an unsubscribe require confirming again rather
+  // than instantly going active.
   const confirmationToken = randomUUID();
   const unsubscribeToken = randomUUID();
 
@@ -81,7 +83,9 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
   return { status: "created", confirmationToken };
 }
 
-export async function confirmSubscriber(token: string): Promise<{ ok: boolean }> {
+export async function confirmSubscriber(
+  token: string
+): Promise<{ ok: boolean; alreadyActive?: boolean }> {
   const supabase = getSupabaseServerClient();
 
   const { data: existing, error: lookupError } = await supabase
@@ -91,7 +95,19 @@ export async function confirmSubscriber(token: string): Promise<{ ok: boolean }>
     .maybeSingle();
 
   if (lookupError) throw lookupError;
-  if (!existing || existing.status !== "pending") {
+  if (!existing) {
+    return { ok: false };
+  }
+
+  // Clicking an already-used confirmation link is not an error, it's the
+  // same successful outcome the person already achieved.
+  if (existing.status === "active") {
+    return { ok: true, alreadyActive: true };
+  }
+
+  if (existing.status !== "pending") {
+    // e.g. this token belongs to a row that's since been unsubscribed;
+    // that confirmation link is genuinely stale.
     return { ok: false };
   }
 
@@ -104,7 +120,9 @@ export async function confirmSubscriber(token: string): Promise<{ ok: boolean }>
   return { ok: true };
 }
 
-export async function unsubscribeByToken(token: string): Promise<{ ok: boolean }> {
+export async function unsubscribeByToken(
+  token: string
+): Promise<{ ok: boolean; alreadyUnsubscribed?: boolean }> {
   const supabase = getSupabaseServerClient();
 
   const { data: existing, error: lookupError } = await supabase
@@ -118,18 +136,18 @@ export async function unsubscribeByToken(token: string): Promise<{ ok: boolean }
     return { ok: false };
   }
 
-  // Idempotent: if already unsubscribed, treat a repeat click as success
-  // rather than erroring.
-  if (existing.status !== "unsubscribed") {
-    const { error } = await supabase
-      .from("subscribers")
-      .update({
-        status: "unsubscribed",
-        unsubscribed_at: new Date().toISOString(),
-      })
-      .eq("id", existing.id);
-    if (error) throw error;
+  if (existing.status === "unsubscribed") {
+    return { ok: true, alreadyUnsubscribed: true };
   }
+
+  const { error } = await supabase
+    .from("subscribers")
+    .update({
+      status: "unsubscribed",
+      unsubscribed_at: new Date().toISOString(),
+    })
+    .eq("id", existing.id);
+  if (error) throw error;
 
   return { ok: true };
 }

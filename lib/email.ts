@@ -10,8 +10,9 @@ function getResendClient() {
 }
 
 // Update this once a sending domain is verified in Resend. Until then,
-// Resend's own onboarding@resend.dev sender works for testing but has
-// real limitations for production sends, see the note in chat.
+// Resend's own onboarding@resend.dev sender ONLY delivers to the email
+// address that owns the Resend account, sends to any other address will
+// fail. That's a hard Resend restriction, not a bug in this file.
 const FROM_ADDRESS =
   process.env.NEWSLETTER_FROM_EMAIL ||
   "Parallax Research Group <onboarding@resend.dev>";
@@ -29,7 +30,11 @@ export async function sendConfirmationEmail(
 
   const confirmUrl = `${siteUrl}/api/confirm?token=${confirmationToken}`;
 
-  await resend.emails.send({
+  // Resend's SDK does NOT throw on API-level failures, it returns
+  // { data, error }. Checking `error` explicitly here is what makes a
+  // failed send actually surface as a failure instead of a false
+  // "Check your inbox" success message.
+  const { error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to: toEmail,
     subject: "Confirm your subscription to Parallax Morning Brief",
@@ -53,4 +58,14 @@ export async function sendConfirmationEmail(
       </div>
     `,
   });
+
+  if (error) {
+    throw new Error(
+      `Resend failed to send the confirmation email: ${
+        typeof error === "object" && error && "message" in error
+          ? (error as { message: string }).message
+          : JSON.stringify(error)
+      }`
+    );
+  }
 }

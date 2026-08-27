@@ -10,11 +10,22 @@ import { unsubscribeByToken } from "@/lib/subscribers";
  * a bare JSON response instead of a page.
  */
 
-function renderPage(success: boolean) {
-  const heading = success ? "You're unsubscribed" : "That link isn't valid";
-  const body = success
-    ? "You will not receive any further Parallax Morning Brief emails. If this was a mistake, you can subscribe again any time from the website."
-    : "This unsubscribe link is missing, expired, or has already been used.";
+type UnsubState = "unsubscribed" | "already" | "invalid";
+
+function renderPage(state: UnsubState) {
+  const heading =
+    state === "invalid"
+      ? "That link isn't valid"
+      : state === "already"
+        ? "You're already unsubscribed"
+        : "You're unsubscribed";
+
+  const body =
+    state === "invalid"
+      ? "This unsubscribe link is missing, expired, or was never valid."
+      : state === "already"
+        ? "This address was already unsubscribed from Parallax Morning Brief. No further action is needed."
+        : "You will not receive any further Parallax Morning Brief emails. If this was a mistake, you can subscribe again any time from the website.";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -35,23 +46,23 @@ function renderPage(success: boolean) {
 </html>`;
 }
 
-async function handleUnsubscribe(token: string | null) {
-  if (!token) {
-    return { ok: false as const };
-  }
+async function resolveState(token: string | null): Promise<UnsubState> {
+  if (!token) return "invalid";
   try {
-    return await unsubscribeByToken(token);
+    const result = await unsubscribeByToken(token);
+    if (!result.ok) return "invalid";
+    return result.alreadyUnsubscribed ? "already" : "unsubscribed";
   } catch (err) {
     console.error("unsubscribe error:", err instanceof Error ? err.message : err);
-    return { ok: false as const };
+    return "invalid";
   }
 }
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
-  const result = await handleUnsubscribe(token);
+  const state = await resolveState(token);
 
-  return new NextResponse(renderPage(result.ok), {
+  return new NextResponse(renderPage(state), {
     status: 200,
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });
@@ -59,10 +70,17 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
-  const result = await handleUnsubscribe(token);
+  const state = await resolveState(token);
 
-  return NextResponse.json(
-    result.ok ? { ok: true } : { ok: false, error: "Invalid or expired token." },
-    { status: result.ok ? 200 : 400 }
-  );
+  if (state === "invalid") {
+    return NextResponse.json(
+      { ok: false, error: "Invalid or expired token." },
+      { status: 400 }
+    );
+  }
+
+  return NextResponse.json({
+    ok: true,
+    alreadyUnsubscribed: state === "already",
+  });
 }
