@@ -7,9 +7,6 @@ export const metadata: Metadata = {
 };
 
 const LINKEDIN_URL = "https://linkedin.com/company/parallax-research-group";
-// Substack now serves as a read-only archive of past issues; the
-// Morning Brief pipeline delivers the real newsletter via Resend.
-const SUBSTACK_URL = "https://theprg.substack.com/";
 
 export default function ContactPage() {
   return (
@@ -40,14 +37,6 @@ export default function ContactPage() {
             className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
           >
             LinkedIn
-          </a>
-          <a
-            href={SUBSTACK_URL}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-[var(--color-ink)]/80 hover:text-[var(--color-navy)] transition-colors"
-          >
-            Substack archive
           </a>
         </div>
       </div>
