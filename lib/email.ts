@@ -17,6 +17,13 @@ const FROM_ADDRESS =
   process.env.NEWSLETTER_FROM_EMAIL ||
   "Parallax Research Group <onboarding@resend.dev>";
 
+// Web-safe sans-serif stack, not a custom font import. Email clients
+// (especially Outlook) frequently strip <link> tags and @font-face, so
+// this uses the closest widely-supported system stack to Inter rather
+// than risking a fallback to a serif font that wouldn't match the site.
+const EMAIL_FONT_STACK =
+  "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
 export async function sendConfirmationEmail(
   toEmail: string,
   confirmationToken: string
@@ -39,20 +46,20 @@ export async function sendConfirmationEmail(
     to: toEmail,
     subject: "Confirm your subscription to Parallax Morning Brief",
     html: `
-      <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; color: #1a1a1a;">
-        <p style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #3C9D9B; margin: 0 0 16px;">
+      <div style="font-family: ${EMAIL_FONT_STACK}; max-width: 480px; margin: 0 auto; padding: 32px 24px; color: #151a1f;">
+        <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #3c9d9b; margin: 0 0 16px;">
           Parallax Research Group
         </p>
-        <h1 style="font-size: 22px; margin: 0 0 16px; color: #173B57;">
+        <h1 style="font-size: 22px; font-weight: 600; margin: 0 0 16px; color: #173b57;">
           Confirm your subscription
         </h1>
         <p style="font-size: 15px; line-height: 1.6; margin: 0 0 24px;">
           Click below to confirm you would like to receive the Parallax Morning Brief.
         </p>
-        <a href="${confirmUrl}" style="display: inline-block; background: #173B57; color: #ffffff; text-decoration: none; padding: 12px 20px; font-size: 14px; font-weight: 600;">
+        <a href="${confirmUrl}" style="display: inline-block; background: #173b57; color: #ffffff; text-decoration: none; padding: 12px 20px; font-size: 14px; font-weight: 600;">
           Confirm subscription
         </a>
-        <p style="font-size: 13px; color: #6b6b6b; margin-top: 24px;">
+        <p style="font-size: 13px; color: #667580; margin-top: 24px;">
           If you did not request this, you can ignore this email.
         </p>
       </div>
