@@ -4,6 +4,11 @@ import { getSupabaseServerClient } from "./supabase";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Bump this string whenever the signup consent wording on the site
+// actually changes, so old rows keep a record of which version they
+// agreed to.
+const CONSENT_VERSION = "signup-v1-2026-08-27";
+
 export function isPlausibleEmail(email: string) {
   return EMAIL_REGEX.test(email);
 }
@@ -41,7 +46,8 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
   }
 
   // Pending: let the confirmation be retried using the same token rather
-  // than minting a new one or creating a second row.
+  // than minting a new one or creating a second row. No new consent event
+  // happened here, so consent_version is left untouched.
   if (existing && existing.status === "pending") {
     return {
       status: "pending-resend",
@@ -50,9 +56,8 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
   }
 
   // Brand new, or previously unsubscribed/bounced/complained: issue a
-  // fresh token pair and require a new confirmation. This is what makes
-  // re-subscription after an unsubscribe require confirming again rather
-  // than instantly going active.
+  // fresh token pair and require a new confirmation. This is also a real
+  // new consent event, so consent_version gets (re)stamped here.
   const confirmationToken = randomUUID();
   const unsubscribeToken = randomUUID();
 
@@ -66,6 +71,7 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
         subscribed_at: new Date().toISOString(),
         confirmed_at: null,
         unsubscribed_at: null,
+        consent_version: CONSENT_VERSION,
       })
       .eq("id", existing.id);
     if (error) throw error;
@@ -76,6 +82,7 @@ export async function upsertSubscriber(rawEmail: string): Promise<UpsertResult> 
       confirmation_token: confirmationToken,
       unsubscribe_token: unsubscribeToken,
       source: "website",
+      consent_version: CONSENT_VERSION,
     });
     if (error) throw error;
   }
