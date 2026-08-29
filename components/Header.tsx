@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/research", label: "Research" },
+  { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

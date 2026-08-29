@@ -1,19 +1,15 @@
-export type Category = "Markets" | "Technology" | "Company Research";
-
-export interface ArticleFrontmatter {
+export interface IssueFrontmatter {
   title: string;
-  author: string;
-  date: string; // ISO date string, e.g. "2026-06-12"
-  category: Category;
+  date: string; // ISO date string, e.g. "2026-08-27"
   summary: string;
   image?: string;
 }
 
-export interface ArticleMeta extends ArticleFrontmatter {
+export interface IssueMeta extends IssueFrontmatter {
   slug: string;
   readingTime: string;
 }
 
-export interface Article extends ArticleMeta {
-  content: string; // raw MDX body, compiled by the article page
+export interface Issue extends IssueMeta {
+  content: string; // raw MDX body, compiled by the issue page
 }

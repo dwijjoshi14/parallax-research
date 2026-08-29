@@ -33,7 +33,7 @@ export default function Footer() {
             Site
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li><a href="/research" className="text-white/80 hover:text-white transition-colors">Research</a></li>
+            <li><a href="/archive" className="text-white/80 hover:text-white transition-colors">Archive</a></li>
             <li><a href="/about" className="text-white/80 hover:text-white transition-colors">About</a></li>
             <li><a href="/contact" className="text-white/80 hover:text-white transition-colors">Contact</a></li>
           </ul>
